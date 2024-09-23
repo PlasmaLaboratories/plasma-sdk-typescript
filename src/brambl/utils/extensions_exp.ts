@@ -137,14 +137,11 @@ function numberToUint8Array4(num: number): Uint8Array {
   // Calculate the number of bytes needed to represent the number
   const length = Math.ceil(Math.log2(num + 1) / 8);
 
-  // Create a Uint8Array of the required length
-  let arr = new Uint8Array(length);
-
-  // Fill the Uint8Array with the bytes of the number
-  for (let i = 0; i < length; i++) {
-    arr[i] = num % 256;
-    num = Math.floor(num / 256);
+  const bytes = new Uint8Array(length);
+  let v = num;
+  for (let i = length - 1; i >= 0; i--) {
+    bytes[i] = (v & 0xff);
+    v = v >> 8;
   }
-
-  return arr;
+  return bytes;
 }
