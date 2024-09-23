@@ -1,8 +1,8 @@
-import { isLeft, isRight, type Either } from 'fp-ts/lib/either.js';
+import { isLeft, isRight, type Either } from 'fp-ts/Either';
 import type { LazyArg } from 'fp-ts/lib/function.js';
 import { type Option } from 'fp-ts/Option';
 
-export { flatMap, isLeft, isRight, left, right, type Either } from 'fp-ts/lib/either.js';
+export { flatMap, isLeft, isRight, left, right, type Either } from 'fp-ts/Either';
 
 export { zip } from 'fp-ts/lib/Array.js';
 
@@ -43,7 +43,7 @@ export const unit: Unit = {};
  * @returns The value contained in the `Option` if it's `Some`.
  * @throws The `Error` returned by the `error` function if the `Option` is `None`.
  */
-export function getOrThrowOption<A> (
+export function getOrThrowOption<A>(
   ma: Option<A>,
   error: LazyArg<Error> = () => new Error('getOrThrow: Option is None')
 ): A {
@@ -64,7 +64,7 @@ export const toRightO = getOrThrowOption;
  * @returns The value contained in the `Either` if it's `Right`.
  * @throws The `Error` returned by the `error` function if the `Either` is `Left`.
  */
-export function getOrThrowEither<E, A> (
+export function getOrThrowEither<E, A>(
   ma: Either<E, A>,
   error: (e: E) => Error = e => new Error(`getorThrow: (Left: ${e})`)
 ): A {
@@ -85,7 +85,7 @@ export const toRightE = getOrThrowEither;
  * @returns The value contained in the `Either` if it's `Left`.
  * @throws The `Error` returned by the `error` function if the `Either` is `Right`.
  */
-export function getOrThrowEitherLeft<A, E> (
+export function getOrThrowEitherLeft<A, E>(
   ma: Either<E, A>,
   error: (a: A) => Error = a => new Error(`getOrThrowEitherLeft: (Right: ${a})`)
 ): E {
